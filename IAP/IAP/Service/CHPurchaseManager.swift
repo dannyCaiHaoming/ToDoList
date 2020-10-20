@@ -38,47 +38,12 @@ let receiptPassword = "213989a3415c4283a217f33b08485354"
 
 let receiptURL = Bundle.main.appStoreReceiptURL
 
-class Receipt: NSObject,NSCoding {
-    var isVerifySuccess: Bool = false
-    var productId : String? //商品Id
-    var originalTransactionId : String?  //原始订单Id
-    var transactionId : String? //订单id
-    var originalPurchaseTime : String?   //原始购买时间，单位微妙
-    var expiryTime : String?    //过期时间，单位微秒
-    
-    override init() {
-        super.init()
-    }
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(isVerifySuccess, forKey: "isVerifySuccess")
-        aCoder.encode(productId, forKey: "productId")
-        aCoder.encode(originalTransactionId, forKey: "originalTransactionId")
-        aCoder.encode(transactionId, forKey: "transactionId")
-        aCoder.encode(originalPurchaseTime, forKey: "originalPurchaseTime")
-        aCoder.encode(expiryTime, forKey: "expiryTime")
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        isVerifySuccess = aDecoder.decodeObject(forKey: "isVerifySuccess") as? Bool ?? false
-        productId = aDecoder.decodeObject(forKey: "productId") as? String
-        originalTransactionId = aDecoder.decodeObject(forKey: "originalTransactionId") as? String
-        transactionId = aDecoder.decodeObject(forKey: "transactionId") as? String
-        originalPurchaseTime = aDecoder.decodeObject(forKey: "originalPurchaseTime") as? String
-        expiryTime = aDecoder.decodeObject(forKey: "expiryTime") as? String
-    }
-}
-
 enum PurchaseError: Error {
     case unknown
     case invalidData
     case notFoundReceipt
     case verifyReceiptError
     case needAppstoreVerify
-}
-
-protocol CHPurchaseManagerDelagate {
-    
 }
 
 
@@ -167,8 +132,6 @@ extension CHPurchaseManager: SKPaymentTransactionObserver {
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]){
         CHLog("transactions count = \(transactions.count)")
         for transaction in transactions {
-            SKPaymentQueue.default().finishTransaction(transaction)
-            return
             switch transaction.transactionState {
             case .purchasing:
                 transactionPurchasing()
