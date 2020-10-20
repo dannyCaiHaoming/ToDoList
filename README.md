@@ -5,7 +5,7 @@
 
 - [ ] UICollectionView联动或者组合的UI问题
 - [ ] CoreGraphics使用，之前绘图总结
-- [ ] IAP内购流程及坑
+- [X] IAP内购流程及坑
 - [ ] Metal或者OpenGL的
 
 #### 0831
