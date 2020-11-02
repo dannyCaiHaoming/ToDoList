@@ -126,8 +126,8 @@
             filePath = "&#x7ed8;&#x5236;/Core Graphics&#x7ed8;&#x5236;/&#x6cb9;&#x753b;&#x7b14;.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "updatePath(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -142,8 +142,8 @@
             filePath = "&#x7ed8;&#x5236;/Core Graphics&#x7ed8;&#x5236;/&#x6cb9;&#x753b;&#x7b14;.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
             landmarkName = "draw(_:in:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -158,8 +158,8 @@
             filePath = "&#x7ed8;&#x5236;/Core Graphics&#x7ed8;&#x5236;/&#x6cb9;&#x753b;&#x7b14;.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
             landmarkName = "draw(_:in:)"
             landmarkType = "7">
          </BreakpointContent>
