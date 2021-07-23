@@ -8,8 +8,52 @@
 import UIKit
 import Foundation
 
-
+var switchValue:Bool = false
 class ViewController: UIViewController {
+    
+    lazy var `switch` :UISwitch = {
+        let v = UISwitch()
+        v.addTarget(self, action: #selector(switchChange), for: .valueChanged)
+        v.frame = CGRect.init(x: (screen_width-100)/2, y: screen_height - 100, width: 100, height: 100)
+        return v
+    }()
+    
+    lazy var leftBtn: UIButton = {
+        let v = UIButton()
+        v.setTitle("<<", for: .normal)
+        v.setTitleColor(.black, for: .normal)
+        v.addTarget(self, action: #selector(leftAction), for: .touchUpInside)
+        v.frame = CGRect.init(x: (screen_width-100)/2-100, y: screen_height - 100, width: 100, height: 100)
+        return v
+    }()
+    
+    lazy var rightBtn: UIButton = {
+        let v = UIButton()
+        v.setTitle(">>", for: .normal)
+        v.setTitleColor(.black, for: .normal)
+        v.addTarget(self, action: #selector(rightAction), for: .touchUpInside)
+        v.frame = CGRect.init(x: (screen_width-100)/2+100, y: screen_height - 100, width: 100, height: 100)
+        return v
+    }()
+    
+    @objc func leftAction() {
+        guard let v = views.filter({ $0.superview != nil }).first as? Input else {
+            return
+        }
+        v.backward()
+    }
+    
+    @objc func rightAction() {
+        guard let v = views.filter({ $0.superview != nil }).first as? Input else {
+            return
+        }
+        v.forward()
+    }
+    
+    
+    @objc func switchChange(){
+        switchValue = self.switch.isOn
+    }
     
     lazy var caView: CAView = {
         let view = CAView(frame: .init(x: 0, y: 0, width: screen_width, height: screen_height / 2))
@@ -25,6 +69,10 @@ class ViewController: UIViewController {
         let view = OilView(frame: UIScreen.main.bounds)
         view.backgroundColor = .green
         return view
+    }()
+    
+    lazy var views: [UIView] = {
+       return [caView,cgView,oilView]
     }()
 
     override func viewDidLoad() {
@@ -42,8 +90,11 @@ class ViewController: UIViewController {
 
     
     func setupUI(){
-//        caView,cgView,
-        self.view.addSubviews(oilView)
+//        caView,cgView,oilView
+        self.view.addSubviews(caView)
+        self.view.addSubview(self.switch)
+        self.view.addSubview(self.leftBtn)
+        self.view.addSubview(self.rightBtn)
         
         let pan = UIPanGestureRecognizer.init(target: self, action: #selector(panAction(_:)))
         pan.maximumNumberOfTouches = 1

@@ -66,7 +66,7 @@ class OilView: UIView,Input {
     
     func touchMove(_ point: CGPoint) {
         points.append(point)
-        updatePath()
+        updatePath(.change)
     }
     
     func touchEnd(_ point: CGPoint) {

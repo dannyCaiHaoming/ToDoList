@@ -8,6 +8,15 @@
 import Foundation
 import UIKit
 
+/*
+ 为啥选用UIView，而不用CALayer，为啥选用CoreGraphics。
+ 1.因为使用UIView能直接有事件响应，能获取到每个下笔点
+ 2.CoreGraphics能直接提供绘制的入口和比较成熟的绘制API，例如能使用UIBezierth绘制圆滑曲线，和简单修改颜色。
+ 
+ 
+ 同样绘制同样可以使用CAShapeLayer，只不过这个功能还需要擦除，所以就没太深入研究CAShapeLayer怎么实现擦除。
+ */
+
 class CGView: UIView,Input {
     
     var bezierPath =  UIBezierPath()
@@ -36,12 +45,12 @@ class CGView: UIView,Input {
     
     func touchMove(_ point: CGPoint) {
         points.append(point)
-        updatePath()
+        updatePath(state: .change)
     }
     
     func touchEnd(_ point: CGPoint) {
         points.append(point)
-        updatePath()
+        updatePath(state: .end)
     }
     
     func updatePath(state: PathState = .change) {

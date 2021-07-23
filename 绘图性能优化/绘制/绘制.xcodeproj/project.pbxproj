@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84246C1026A9987200D5F2A1 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84246C0F26A9987200D5F2A1 /* Stack.swift */; };
 		844D11BD254950C70060A851 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D11BC254950C70060A851 /* AppDelegate.swift */; };
 		844D11BF254950C70060A851 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D11BE254950C70060A851 /* SceneDelegate.swift */; };
 		844D11C1254950C70060A851 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D11C0254950C70060A851 /* ViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		84246C0F26A9987200D5F2A1 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		844D11B9254950C70060A851 /* 绘制.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "绘制.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		844D11BC254950C70060A851 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		844D11BE254950C70060A851 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				844D11C7254950C90060A851 /* LaunchScreen.storyboard */,
 				844D11CA254950C90060A851 /* Info.plist */,
 				844D11EC25498CC00060A851 /* test.plist */,
+				84246C0F26A9987200D5F2A1 /* Stack.swift */,
 			);
 			path = "绘制";
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				844D11C1254950C70060A851 /* ViewController.swift in Sources */,
 				844D11DE254958840060A851 /* Global.swift in Sources */,
 				844D1245254C16A50060A851 /* CGPath+Ext.swift in Sources */,
+				84246C1026A9987200D5F2A1 /* Stack.swift in Sources */,
 				844D11BD254950C70060A851 /* AppDelegate.swift in Sources */,
 				844D11E3254958D00060A851 /* UIView+Ext.swift in Sources */,
 				844D11EA254965760060A851 /* CG绘制.swift in Sources */,

@@ -13,4 +13,13 @@ protocol Input {
     func touchBegan(_ point: CGPoint)
     func touchMove(_ point: CGPoint)
     func touchEnd(_ point: CGPoint)
+    
+    func forward()
+    func backward()
+}
+
+
+extension Input {
+    func forward() {}
+    func backward() {}
 }
