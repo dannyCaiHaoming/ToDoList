@@ -67,7 +67,7 @@ class ViewController: UIViewController {
     
     lazy var oilView: OilView = {
         let view = OilView(frame: UIScreen.main.bounds)
-        view.backgroundColor = .green
+        view.backgroundColor = .white
         return view
     }()
     
@@ -91,7 +91,7 @@ class ViewController: UIViewController {
     
     func setupUI(){
 //        caView,cgView,oilView
-        self.view.addSubviews(caView)
+        self.view.addSubviews(oilView)
         self.view.addSubview(self.switch)
         self.view.addSubview(self.leftBtn)
         self.view.addSubview(self.rightBtn)

@@ -20,7 +20,7 @@ class OilView: UIView,Input {
     var increaseDrawPoints: [CGPoint] = []
     var bezierPath =  UIBezierPath()
     var cglayer :CGLayer? = nil
-    var fullCGLayer: CGLayer? = nil
+//    var fullCGLayer: CGLayer? = nil
     
     lazy var oliPenImage: UIImage? = {
         getOilPenImage()
@@ -44,12 +44,17 @@ class OilView: UIView,Input {
         UIGraphicsBeginImageContextWithOptions(OilView.penSize, false, UIScreen.main.scale)
         let ctx = UIGraphicsGetCurrentContext()
         
-        if let cgimage = UIImage(named: "PenMask")?.cgImage {
-            ctx?.clip(to: CGRect.init(origin: .zero, size: OilView.penSize), mask: cgimage)
-        }
-        
-        ctx?.setFillColor(OilView.penColor.cgColor)
-        ctx?.fill(CGRect.init(origin: .zero, size: OilView.penSize))
+//        if let cgimage = UIImage(named: "PenMask")?.cgImage {
+//            ctx?.clip(to: CGRect.init(origin: .zero, size: OilView.penSize), mask: cgimage)
+//
+//            ctx?.clip(to: <#T##CGRect#>, mask: <#T##CGImage#>)
+//        }
+//
+//        ctx?.setFillColor(OilView.penColor.cgColor)
+//        ctx?.fill(CGRect.init(origin: .zero, size: OilView.penSize))
+        let width = OilView.penSize.width
+        ctx?.setFillColor(UIColor.red.cgColor)
+        ctx?.fillEllipse(in: .init(x: width/4, y: width/4, width: width/2, height: width/2))
         
         image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -183,11 +188,6 @@ class OilView: UIView,Input {
             return
         }
         
-        var fullCGLayer_ = self.fullCGLayer
-        if fullCGLayer_ == nil {
-            fullCGLayer_ = CGLayer(ctx, size: self.bounds.size, auxiliaryInfo: nil)
-        }
-
         var cglayer_ = self.cglayer
         if cglayer_ == nil {
             cglayer_ = CGLayer(ctx, size: OilView.penSize, auxiliaryInfo: nil)
@@ -198,27 +198,29 @@ class OilView: UIView,Input {
             UIGraphicsPushContext(cgCtx)
 //            cgCtx.setFillColor(UIColor.clear.cgColor)
 //            cgCtx.fill(.init(origin: .zero, size: OilView.penSize))
-            cgCtx.clear(.init(origin: .zero, size: OilView.penSize))
+            cgCtx.setFillColor(UIColor.clear.cgColor)
+//            cgCtx.clear(.init(origin: .zero, size: OilView.penSize))
             penImage.draw(at: .zero)
             UIGraphicsPopContext()
         }
-
         
-
-        guard let fullCGLayer = fullCGLayer_,
-              let fullLayerCtx = fullCGLayer_?.context else {
-            return
+        
+        self.increaseDrawPoints.forEach { point in
+            let width = OilView.penSize.width
+            ctx.draw(cglayer!, in: .init(origin: .init(x: point.x-width/2, y: point.y-width/2), size: OilView.penSize))
         }
+
+    
         
-        fullLayerCtx.saveGState()
-        let width = OilView.penSize.width
-        fullLayerCtx.translateBy(x: -width/2, y: -width/2)
-        self.increaseDrawPoints.forEach { (point) in
-            fullLayerCtx.draw(cglayer_!, in: .init(origin: point, size: OilView.penSize))
-        }
-        fullLayerCtx.restoreGState()
-        
-        ctx.draw(fullCGLayer, in: self.bounds)
+//        fullLayerCtx.saveGState()
+//        let width = OilView.penSize.width
+//        fullLayerCtx.translateBy(x: -width/2, y: -width/2)
+//        self.increaseDrawPoints.forEach { (point) in
+//            fullLayerCtx.draw(cglayer_!, in: .init(origin: point, size: OilView.penSize))
+//        }
+//        fullLayerCtx.restoreGState()
+//
+//        ctx.draw(fullCGLayer, in: self.bounds)
         
         
         

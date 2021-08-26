@@ -22,6 +22,8 @@ class CGView: UIView,Input {
     var bezierPath =  UIBezierPath()
     var points: [CGPoint] = []
     
+    var result: UIImage? = nil
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -34,7 +36,7 @@ class CGView: UIView,Input {
     
     
     func setup(){
-        self.backgroundColor = UIColor.green
+        self.backgroundColor = UIColor.clear
     }
     
     func touchBegan(_ point: CGPoint) {
@@ -67,6 +69,9 @@ class CGView: UIView,Input {
             if let point = points.last {
                 bezierPath.addLine(to: point)
             }
+        case .end:
+            getResult()
+            return
         default:
             break
         }
@@ -74,24 +79,41 @@ class CGView: UIView,Input {
         self.setNeedsDisplay()
     }
     
+    func getResult() {
+        
+        UIGraphicsBeginImageContext(self.bounds.size)
+        
+        if let ctx = UIGraphicsGetCurrentContext() {
+            self.layer.draw(in: ctx)
+            let result =  UIGraphicsGetImageFromCurrentImageContext()
+            self.result = result
+            UIGraphicsEndImageContext()
+        }
+    
+    }
     
     override func draw(_ rect: CGRect) {
         
         let ctx = UIGraphicsGetCurrentContext()
         
+        result?.draw(at: .zero)
+        
         ctx?.addPath(self.bezierPath.cgPath)
         
         ctx?.setLineWidth(10.0)
         
-        ctx?.setStrokeColor(UIColor.purple.cgColor)
+        if switchValue {
+            ctx?.setStrokeColor(UIColor.clear.cgColor)
+            ctx?.setBlendMode(.clear)
+            
+        }else {
+            ctx?.setStrokeColor(UIColor.purple.cgColor)
+        }
+        
         
         ctx?.setFillColor(UIColor.clear.cgColor)
         
         ctx?.strokePath()
-        
-
-        
-        
         
         
     }
