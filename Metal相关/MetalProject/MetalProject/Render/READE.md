@@ -4,6 +4,13 @@
 
 ## 渲染的步骤
 
+1.  获取GPU抽象,使用`MTLCreateSystemDefaultDevice()`获取当前设备能够使用Metal的GPU对象
+2.  根据`device`构建`MTLLIbrary`,使用`MTLLibrary`构建`顶点着色器函数`和`图元着色器函数`
+3. 使用`MTLRenderPipelineState`描述数据传输给GPU之前需要经历的`顶点着色器`和`图元着色器`以及过程中的一些状态,用于描述管道。而这个管道状态由`MTLRenderPipelineDescriptor`构造 
+4.  有了管道之后，需要将渲染操作指令传递给GPU执行。需要创建一个命令队列`MTLCommandQueue`。命令队列等于一个列车轨道
+5. 有了轨道需要载具，于是创建`MTLCommandBuffer` 命令缓冲区当做一节节车厢
+6. 使用`MTLRenderCommandEncoder`为命令缓冲区写入每个命令，`MTLRenderCommandEncoder`需要调用`endEncoding`之后，才能让`MTLCommandBuffer` 命令缓冲区确认结束命令写入，然后开始发送到GPU进行执行。
+
 
 ## 渲染中数据的传输
 
